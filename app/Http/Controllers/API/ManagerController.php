@@ -1,0 +1,66 @@
+<?php
+
+namespace App\Http\Controllers\API;
+
+use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Http\Request;
+use  App\Http\Resources\Manager as ManagerResource;
+
+
+class ManagerController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request)
+    {
+    $limit = $request->input('limit') <= 50 ? $request->input('limit') : 15;
+    $users = User::where('role', 3)
+              ->paginate($limit);
+    $managerResource = ManagerResource::collection($users);
+    return $managerResource->response()->setStatusCode(200);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {
+    $user = User::findOrFail($id);
+    if ($user->role !== 3) {
+        return response()->json([
+            'message' => 'There is no manager with this ID'
+           ], 403);
+    }
+
+    $managerResource = new ManagerResource($user);
+    return $managerResource->response()
+        ->setStatusCode(200, "User has been successfully accessed")
+        ->header('Additional Header', 'True');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, User $user)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(User $user)
+    {
+        //
+    }
+}

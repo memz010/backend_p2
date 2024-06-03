@@ -43,4 +43,3 @@ Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
 
 
-

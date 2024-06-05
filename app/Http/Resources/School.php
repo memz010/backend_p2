@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use  App\Http\Resources\School as SchoolResource;
@@ -20,7 +21,7 @@ class School extends JsonResource
         'Name of School' => $this->name,
         'type of School' => $this->type,
         'Age of Stage' => $this->age_stage,
-        'Subscription Price in School' => $this->subscription_price,
+        'Subscription Price in School' => $this->Subscription_price,
         'Address of School' => $this->address,
         ] ;
     }

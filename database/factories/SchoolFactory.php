@@ -18,7 +18,7 @@ class SchoolFactory extends Factory
             'type' => fake()->word(),
             'age_stage' => fake()->word(),
             'address' => fake()->word(),
-            'Subscription_price' => $this->faker->numberBetween(100, 500),
+           // 'Subscription_price' => $this->faker->numberBetween(0, 500),
 
 
         ];

@@ -7,6 +7,7 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\TeacherController;
 use App\Http\Controllers\API\ManagerController;
 use App\Http\Controllers\API\SchoolController;
+use App\Http\Controllers\API\AdditionController;
 
 
 /*
@@ -39,18 +40,19 @@ Route::post('/users', [UserController::class, 'store']);
 Route::post('/users/{user}', [UserController::class, 'update']);
 //delete all rolls of users
 Route::delete('/users/{id}', [UserController::class, 'destroy']);
-// indax all schools
+// CRUD for all schools
 Route::apiResource('/schools',SchoolController::class,) ;
-// show specific schools
 Route::get('/api/schools/{id}', [SchoolController::class, 'show']);
-//store a new schools
 Route::post('/schools', [SchoolController::class, 'store']);
-//update information schools
 Route::post('/api/schools/{school}', [SchoolController::class, 'update']);
-//delete all rolls of schools
 Route::delete('/schools/{id}', [SchoolController::class, 'destroy']);
-
-
+// CRUD for all Addition
+Route::apiResource('/additions',AdditionController::class,) ;
+Route::get('/api/additions/{id}', [AdditionController::class, 'show']);
+Route::post('/additions', [AdditionController::class, 'store']);
+Route::post('/additions/{addition}', [AdditionController::class, 'update']);
+Route::delete('/schools/{id}', [AdditionController::class, 'destroy']);
+// 
 
 
 

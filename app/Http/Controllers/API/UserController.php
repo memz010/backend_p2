@@ -92,7 +92,7 @@ class UserController
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-{
+    {
     $user = User::find($id);
     if ($user) {
         if ($request->has('school_id')) {

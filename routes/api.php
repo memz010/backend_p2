@@ -39,22 +39,35 @@ Route::apiResource('/managers', ManagerController::class);
 Route::get('/api/students/{id}', [UserController::class, 'show']);
 Route::get('/api/teachers/{id}', [TeacherController::class, 'show']);
 Route::get('/api/managers/{id}', [ManagerController::class, 'show']);
+
+Route::middleware('auth:api','admin')->group(function () {
+    Route::post('/users', [UserController::class, 'store']);
+    //update information users
+    Route::post('/users/{user}', [UserController::class, 'update']);
+    //delete all rolls of users
+    Route::delete('/users/{id}', [UserController::class, 'destroy']);
+});
 //store a new users
-Route::post('/users', [UserController::class, 'store']);
-//update information users
-Route::post('/users/{user}', [UserController::class, 'update']);
-//delete all rolls of users
-Route::delete('/users/{id}', [UserController::class, 'destroy']);
+
 // CRUD for all schools
 Route::apiResource('/schools',SchoolController::class,) ;
 Route::get('/api/schools/{id}', [SchoolController::class, 'show']);
+//
+Route::middleware('auth:api','admin')->group(function () {
 Route::post('/schools', [SchoolController::class, 'store']);
 Route::post('/api/schools/{school}', [SchoolController::class, 'update']);
 Route::delete('/schools/{id}', [SchoolController::class, 'destroy']);
+});
 // CRUD for all Addition
+// get all addition ...
 Route::apiResource('/additions',AdditionController::class,) ;
 Route::get('/api/additions/{id}', [AdditionController::class, 'show']);
+//
+Route::middleware('auth:api','admin')->group(function () {
+
 Route::post('/additions', [AdditionController::class, 'store']);
 Route::post('/additions/{addition}', [AdditionController::class, 'update']);
 Route::delete('/additions/{id}', [AdditionController::class, 'destroy']);
+
+});
 //

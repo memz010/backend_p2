@@ -8,6 +8,7 @@ use App\Http\Controllers\API\TeacherController;
 use App\Http\Controllers\API\ManagerController;
 use App\Http\Controllers\API\SchoolController;
 use App\Http\Controllers\API\AdditionController;
+use App\Http\Controllers\API\AuthController;
 
 
 /*
@@ -25,7 +26,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('/register', [ AuthController::class ,'register']);
+    Route::post('/login',[AuthController::class ,'login']);
+    Route::middleware('auth:api')->get('/logout', [ AuthController::class ,'logout']);
+});
 // index all rolls of users
 Route::apiResource('/students', UserController::class) ;
 Route::apiResource('/teachers', TeacherController::class);
@@ -51,11 +56,5 @@ Route::apiResource('/additions',AdditionController::class,) ;
 Route::get('/api/additions/{id}', [AdditionController::class, 'show']);
 Route::post('/additions', [AdditionController::class, 'store']);
 Route::post('/additions/{addition}', [AdditionController::class, 'update']);
-Route::delete('/schools/{id}', [AdditionController::class, 'destroy']);
-// 
-
-
-
-
-
-
+Route::delete('/additions/{id}', [AdditionController::class, 'destroy']);
+//

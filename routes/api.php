@@ -12,6 +12,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\RelationshipController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,12 +24,11 @@ use App\Http\Controllers\API\RelationshipController;
 |
 */
 
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('schools/{id}/students', [RelationshipController::class, 'schoolstudents']);
-Route::get('schools/{id}/teachers', [RelationshipController::class, 'schoolteachers']);
-Route::get('schools/{id}/managers', [RelationshipController::class, 'schoolmanagers']);
+
 //
 Route::group(['prefix' => 'auth'], function () {
     Route::post('/register', [ AuthController::class ,'register']);
@@ -54,8 +54,11 @@ Route::middleware('auth:api','admin')->group(function () {
 //store a new users
 
 // CRUD for all schools
+Route::get('schools/search', [SchoolController::class, 'searchSchools']);
 Route::apiResource('/schools',SchoolController::class,) ;
 Route::get('/api/schools/{id}', [SchoolController::class, 'show']);
+// search for all schools
+
 //
 Route::middleware('auth:api','admin')->group(function () {
 Route::post('/schools', [SchoolController::class, 'store']);
@@ -74,6 +77,8 @@ Route::post('/additions/{addition}', [AdditionController::class, 'update']);
 Route::delete('/additions/{id}', [AdditionController::class, 'destroy']);
 });
 // Relationship //
-
-
+Route::get('schools/{id}/students', [RelationshipController::class, 'schoolstudents']);
+Route::get('schools/{id}/teachers', [RelationshipController::class, 'schoolteachers']);
+Route::get('schools/{id}/managers', [RelationshipController::class, 'schoolmanagers']);
 //
+

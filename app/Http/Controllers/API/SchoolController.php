@@ -11,13 +11,17 @@ use App\Http\Resources\School as SchoolResource;
 
 class SchoolController
 {
-    public function __construct()
+
+    public function searchSchools(Request $request)
     {
-        $this->middleware('auth:api')->except(['index','show']);
+        $query = $request->input('query');
+        $schools = School::where('name', 'like', "%{$query}%")->get();
+        
+        return response()->json([
+            "status" => "success",
+            "schools" => $schools->toArray()
+        ]);
     }
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $limit = $request->input('limit') <=50 ? $request->input('limit') : 15 ;

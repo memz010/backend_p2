@@ -11,6 +11,13 @@ use App\Http\Resources\Addition as AdditionResource;
 
 class AdditionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except(['index','show']);
+        $this->middleware('admin')->except(['index','show']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -100,9 +107,14 @@ class AdditionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+     if ($request->user()->role !== 4) {
+         return response()->json(['message' => 'Forbidden'], 403);
+     }
         Addition::findOrFail($id)->delete();
-        return "Students Addition deleted Succfully" ;
+        return response()->json([
+            "delete succecfully"
+        ]);
     }
 }

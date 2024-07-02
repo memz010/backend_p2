@@ -10,6 +10,7 @@ use App\Http\Controllers\API\SchoolController;
 use App\Http\Controllers\API\AdditionController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\RelationshipController;
+use App\Http\Controllers\API\CertificateController;
 
 
 
@@ -80,5 +81,12 @@ Route::delete('/additions/{id}', [AdditionController::class, 'destroy']);
 Route::get('schools/{id}/students', [RelationshipController::class, 'schoolstudents']);
 Route::get('schools/{id}/teachers', [RelationshipController::class, 'schoolteachers']);
 Route::get('schools/{id}/managers', [RelationshipController::class, 'schoolmanagers']);
-//
-
+// show Certificate //
+Route::apiResource('/certificate', CertificateController::class) ;
+Route::get('/api/certificate/{id}', [CertificateController::class, 'show']);
+// crud by admin
+Route::middleware('auth:api','admin')->group(function () {
+Route::post('/certificate/{id}', [CertificateController::class, 'update']);
+Route::delete('/certificate/{id}', [CertificateController::class, 'destroy']);
+Route::post('/certificate', [CertificateController::class, 'store']);
+});

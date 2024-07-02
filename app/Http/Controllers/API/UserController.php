@@ -45,6 +45,7 @@ class UserController
                 'errors' => $validator->errors(),
             ], 422);
         }
+        $imagepath = $request->file('image')->store('images');
         User::create([
             'school_id' => $request->school_id,
             'role' => $request->role,
@@ -57,13 +58,9 @@ class UserController
             'gender' => $request->gender,
             'nationality' => $request->nationality,
             'phone' => $request->phone,
-            'image' => $request->image,
+            'image' => $imagepath,
         ]);
-        if ($request->file('image')) {
-            $imagepath = $request->file('image')->store('images');
-            $user->image = $imagePath;
-            $user->save();
-        }
+
         return response()->json([
             'status' => 'success',
             'message' => 'users stored successfully'
@@ -104,7 +101,7 @@ class UserController
 
         if ($request->has('role')) {
             $request->validate([
-                'role' => 'required|integer',
+                'role' => 'required|integer|min:1|max:4',
             ]);
             $user->role = $request->role;
         }
@@ -206,7 +203,8 @@ class UserController
 
         // Then delete the user
         $user->delete();
-
-        return "User deleted Successfully";
+        return response()->json([
+            "delete succecfully"
+        ]);
     }
 }

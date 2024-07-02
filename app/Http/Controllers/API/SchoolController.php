@@ -16,7 +16,7 @@ class SchoolController
     {
         $query = $request->input('query');
         $schools = School::where('name', 'like', "%{$query}%")->get();
-        
+
         return response()->json([
             "status" => "success",
             "schools" => $schools->toArray()
@@ -122,8 +122,11 @@ class SchoolController
     /**
      * Remove the specified resource from storage.
      */
-     public function destroy($id)
+    public function destroy(Request $request, $id)
        {
+        if ($request->user()->role !== 4) {
+            return response()->json(['message' => 'Forbidden'], 403);
+        }
             $school = School::findOrFail($id);
             // Delete all certificates associated with the user
             $school->certificates()->delete();
@@ -131,7 +134,9 @@ class SchoolController
             // Then delete the user
             $school->delete();
 
-            return "school deleted Successfully";
+            return response()->json([
+                "delete succecfully"
+            ]);
         }
     }
 

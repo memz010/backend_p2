@@ -15,6 +15,13 @@ class Certificate extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+         return
+        [
+            'title' => $this->title,
+            'description' => $this->description,
+            'file' => $this->file,
+            'school_id' => $this->school_id,
+            'user_id' => $this->user_id,
+            ] ;
     }
 }

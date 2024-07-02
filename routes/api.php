@@ -11,6 +11,7 @@ use App\Http\Controllers\API\AdditionController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\RelationshipController;
 use App\Http\Controllers\API\CertificateController;
+use App\Http\Controllers\API\GradeController;
 
 
 
@@ -90,3 +91,11 @@ Route::post('/certificate/{id}', [CertificateController::class, 'update']);
 Route::delete('/certificate/{id}', [CertificateController::class, 'destroy']);
 Route::post('/certificate', [CertificateController::class, 'store']);
 });
+
+Route::apiResource('/grades', GradeController::class) ;
+Route::get('/api/grades/{id}', [GradeController::class, 'show']);
+Route::middleware('auth:api','admin')->group(function () {
+    Route::post('/grades/{id}', [GradeController::class, 'update']);
+    Route::delete('/grades/{id}', [GradeController::class, 'destroy']);
+    Route::post('/grades', [GradeController::class, 'store']);
+    });

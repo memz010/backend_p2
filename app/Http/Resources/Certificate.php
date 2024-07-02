@@ -22,6 +22,6 @@ class Certificate extends JsonResource
             'file' => $this->file,
             'school_id' => $this->school_id,
             'user_id' => $this->user_id,
-            ] ;
+        ] ;
     }
 }

@@ -25,7 +25,30 @@ class GradeController
      */
     public function store(Request $request)
     {
-        //
+        $validator = validator($request->all(), [
+            'student_id' => 'required|integer',
+            'exam_id' => 'required|integer',
+            'grade' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+        $grade = Grade::create([
+            'student_id' => $request->student_id,
+            'exam_id' => $request->exam_id,
+            'grade' => $request->grade,
+        ]);
+
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'grade stored successfully',
+            'grade' => $grade,
+        ], 201);
     }
 
     /**
@@ -41,16 +64,49 @@ class GradeController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Grade $grade)
+    public function update(Request $request, $id)
     {
-        //
-    }
+    $grades = Grade::find($id);
+    if ($grades) {
+        if ($request->has('student_id')) {
+            $request->validate([
+                'student_id' => 'required|exists:users,id',
+            ]);
+            $grades->student_id = $request->student_id;
+        }
+        if ($request->has('exam_id')) {
+            $request->validate([
+                'exam_id' => 'required|exists:exams,id',
+            ]);
+            $grades->exam_id = $request->exam_id;
+        }
+        if ($request->has('grade')) {
+            $request->validate([
+                'grade' => 'required|string',
+            ]);
+            $grades->grade = $request->grade;
+        }
+        $grades->save();
 
+        return response()->json([
+            'status' => 'success',
+            'message' => 'student grade updated successfully',
+        ], 201);
+    } else {
+        return response()->json([
+            "status" => "error",
+            "message" => "There is no grade with this id",
+        ], 422);
+    }
+}
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Grade $grade)
+     public function destroy($id)
     {
-        //
+        Grade::findOrFail($id)->delete();
+        return response()->json(['message' => 'Grade deleted successfully.']);
     }
+
 }
+

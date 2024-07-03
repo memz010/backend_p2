@@ -15,6 +15,10 @@ class Exam extends JsonResource
      */
     public function toArray(Request $request): array
     {
-       
+        return
+        [
+            'school_id' => $this->school_id,
+            'exam_date' => $this->exam_date,
+        ] ;
     }
 }

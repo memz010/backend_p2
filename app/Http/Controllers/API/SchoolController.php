@@ -124,9 +124,6 @@ class SchoolController
      */
     public function destroy(Request $request, $id)
        {
-        if ($request->user()->role !== 4) {
-            return response()->json(['message' => 'Forbidden'], 403);
-        }
             $school = School::findOrFail($id);
             // Delete all certificates associated with the user
             $school->certificates()->delete();

@@ -51,7 +51,7 @@ class AdditionController extends Controller
         ]);
         return response()->json([
             'status' => 'success',
-            'message' => 'users stored successfully'
+            'message' => 'users additions stored successfully'
         ], 201);
     }
 
@@ -107,14 +107,10 @@ class AdditionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-     if ($request->user()->role !== 4) {
-         return response()->json(['message' => 'Forbidden'], 403);
-     }
         Addition::findOrFail($id)->delete();
-        return response()->json([
-            "delete succecfully"
-        ]);
+
+        return response()->json(['message' => 'Addition deleted successfully.']);
     }
 }

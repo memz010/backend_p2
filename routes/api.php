@@ -12,6 +12,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\RelationshipController;
 use App\Http\Controllers\API\CertificateController;
 use App\Http\Controllers\API\GradeController;
+use App\Http\Controllers\API\ExamController;
 
 
 
@@ -87,15 +88,31 @@ Route::apiResource('/certificate', CertificateController::class) ;
 Route::get('/api/certificate/{id}', [CertificateController::class, 'show']);
 // crud by admin
 Route::middleware('auth:api','admin')->group(function () {
-Route::post('/certificate/{id}', [CertificateController::class, 'update']);
-Route::delete('/certificate/{id}', [CertificateController::class, 'destroy']);
-Route::post('/certificate', [CertificateController::class, 'store']);
-});
 
+Route::post('/certificate', [CertificateController::class, 'store']);
+Route::post('/certificate/{id}', [CertificateController::class, 'update']);
+Route::delete('/certificate/{certificate}', [CertificateController::class, 'destroy']);
+
+});
+// crud all grades //
 Route::apiResource('/grades', GradeController::class) ;
 Route::get('/api/grades/{id}', [GradeController::class, 'show']);
+
 Route::middleware('auth:api','admin')->group(function () {
-//Route::post('/grades/{id}', [GradeController::class, 'update']);
-//Route::delete('/grades/{id}', [GradeController::class, 'destroy']);
-//Route::post('/grades', [GradeController::class, 'store']);
+
+Route::post('/grades', [GradeController::class, 'store']);
+Route::post('/grades/{id}', [GradeController::class, 'update']);
+Route::delete('/grades/{grade}', [GradeController::class, 'destroy']);
+
+});
+// crud all exam //
+Route::apiResource('/exams', ExamController::class) ;
+Route::get('/api/exams/{id}', [ExamController::class, 'show']);
+
+Route::middleware('auth:api','admin')->group(function () {
+
+Route::post('/exams', [ExamController::class, 'store']);
+Route::post('/exams/{id}', [ExamController::class, 'update']);
+Route::delete('/exams/{exam}', [ExamController::class, 'destroy']);
+
 });

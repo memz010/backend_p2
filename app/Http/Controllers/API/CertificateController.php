@@ -140,10 +140,6 @@ class CertificateController
     $certificate = Certificate::findOrFail($id);
 
     // Check if the authenticated user is an admin
-    if ($request->user()->role !== 4) {
-        return response()->json(['message' => 'Forbidden'], 403);
-    }
-
     $certificate->delete();
     return response()->json(['message' => 'Certificate deleted successfully.']);
 }

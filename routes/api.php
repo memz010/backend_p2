@@ -95,7 +95,7 @@ Route::post('/certificate', [CertificateController::class, 'store']);
 Route::apiResource('/grades', GradeController::class) ;
 Route::get('/api/grades/{id}', [GradeController::class, 'show']);
 Route::middleware('auth:api','admin')->group(function () {
-    Route::post('/grades/{id}', [GradeController::class, 'update']);
-    Route::delete('/grades/{id}', [GradeController::class, 'destroy']);
-    Route::post('/grades', [GradeController::class, 'store']);
-    });
+//Route::post('/grades/{id}', [GradeController::class, 'update']);
+//Route::delete('/grades/{id}', [GradeController::class, 'destroy']);
+//Route::post('/grades', [GradeController::class, 'store']);
+});

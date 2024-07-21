@@ -45,6 +45,7 @@ class UserController
                 'errors' => $validator->errors(),
             ], 422);
         }
+        $imagePath = null;
         $imagepath = $request->file('image')->store('images');
         User::create([
             'school_id' => $request->school_id,
@@ -58,7 +59,7 @@ class UserController
             'gender' => $request->gender,
             'nationality' => $request->nationality,
             'phone' => $request->phone,
-            'image' => $imagepath,
+            'image' => $request->imagepath,
         ]);
 
         return response()->json([

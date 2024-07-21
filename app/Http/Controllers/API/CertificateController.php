@@ -37,7 +37,7 @@ class CertificateController
             'school_id' => 'required|integer',
             'title' => 'required|string',
             'description' => 'required|string',
-            'file' => 'nullable|file',
+            'file' => 'required|file',
         ]);
 
         if ($validator->fails()) {

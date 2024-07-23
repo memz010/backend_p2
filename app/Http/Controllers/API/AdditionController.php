@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Http\Resources\Addition as AdditionResource;
 
-
+ 
 class AdditionController extends Controller
 {
 

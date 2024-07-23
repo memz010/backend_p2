@@ -13,6 +13,9 @@ use App\Http\Controllers\API\RelationshipController;
 use App\Http\Controllers\API\CertificateController;
 use App\Http\Controllers\API\GradeController;
 use App\Http\Controllers\API\ExamController;
+use App\Http\Controllers\API\BookController;
+use App\Http\Controllers\API\GuardianController;
+use App\Http\Controllers\API\Library_BookController;
 
 
 
@@ -84,6 +87,7 @@ Route::get('schools/{id}/students', [RelationshipController::class, 'schoolstude
 Route::get('schools/{id}/teachers', [RelationshipController::class, 'schoolteachers']);
 Route::get('schools/{id}/managers', [RelationshipController::class, 'schoolmanagers']);
 // show Certificate //
+
 Route::apiResource('/certificate', CertificateController::class) ;
 Route::get('/api/certificate/{id}', [CertificateController::class, 'show']);
 // crud by admin
@@ -116,3 +120,35 @@ Route::post('/exams/{id}', [ExamController::class, 'update']);
 Route::delete('/exams/{exam}', [ExamController::class, 'destroy']);
 
 // });
+
+// CRUD BOOK //
+Route::apiResource('/books', BookController::class) ;
+Route::get('/api/books/{id}', [BookController::class, 'show']);
+// crud by admin
+//Route::middleware('auth:api','admin')->group(function () {
+
+Route::post('/books', [BookController::class, 'store']);
+Route::post('/books/{id}', [BookController::class, 'update']);
+Route::delete('/books/{id}', [BookController::class, 'destroy']);
+// });
+
+// CRUD GuardianController //
+Route::apiResource('/Guardians', GuardianController::class) ;
+Route::get('/api/Guardians/{id}', [GuardianController::class, 'show']);
+// crud by admin
+//Route::middleware('auth:api','admin')->group(function () {
+Route::post('/Guardians', [GuardianController::class, 'store']);
+// });
+
+// CRUD Library_Book //
+Route::apiResource('/Library_books', Library_BookController::class) ;
+Route::get('/api/Library_books/{id}', [Library_BookController::class, 'show']);
+// crud by admin
+//Route::middleware('auth:api','admin')->group(function () {
+
+Route::post('/Library_books', [Library_BookController::class, 'store']);
+Route::post('/Library_books/{id}', [Library_BookController::class, 'update']);
+Route::delete('/Library_books/{id}', [Library_BookController::class, 'destroy']);
+// });
+
+

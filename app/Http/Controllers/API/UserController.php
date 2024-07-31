@@ -184,7 +184,8 @@ class UserController
             'status' => 'success',
             'message' => 'User updated successfully',
         ], 201);
-    } else {
+    }
+     else {
         return response()->json([
             "status" => "error",
             "message" => "There is no user with this ID",

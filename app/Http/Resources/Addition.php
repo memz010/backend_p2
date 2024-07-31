@@ -17,7 +17,7 @@ class Addition extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-           //'ID Addition' => $this->id ,
+           'ID Addition' => $this->id ,
            'ID School Addition' => $this->school_id ,
            'ID OF students ' => $this->student_id,
            'information_request' => $this->information_request,

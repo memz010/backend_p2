@@ -18,6 +18,7 @@ class School extends JsonResource
     {
         return
         [
+        'id of schools' => $this->id ,
         'Name of School' => $this->name,
         'type of School' => $this->type,
         'Age of Stage' => $this->age_stage,

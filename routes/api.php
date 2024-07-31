@@ -16,6 +16,7 @@ use App\Http\Controllers\API\ExamController;
 use App\Http\Controllers\API\BookController;
 use App\Http\Controllers\API\GuardianController;
 use App\Http\Controllers\API\Library_BookController;
+use App\Http\Controllers\API\LibrarieController;
 
 
 
@@ -66,22 +67,22 @@ Route::get('/api/schools/{id}', [SchoolController::class, 'show']);
 // search for all schools
 
 //
-//Route::middleware('auth:api','admin')->group(function () {
+Route::middleware('auth:api','admin')->group(function () {
 Route::post('/schools', [SchoolController::class, 'store']);
-Route::post('/api/schools/{school}', [SchoolController::class, 'update']);
+Route::post('/schools/{id}', [SchoolController::class, 'update']);
 Route::delete('/schools/{id}', [SchoolController::class, 'destroy']);
-//});
+});
 // CRUD for all Addition
 // get all addition ...
 Route::apiResource('/additions',AdditionController::class,) ;
 Route::get('/api/additions/{id}', [AdditionController::class, 'show']);
 //
-//Route::middleware('auth:api','admin')->group(function () {
+Route::middleware('auth:api','admin')->group(function () {
 
 Route::post('/additions', [AdditionController::class, 'store']);
 Route::post('/additions/{addition}', [AdditionController::class, 'update']);
 Route::delete('/additions/{id}', [AdditionController::class, 'destroy']);
-//});
+});
 // Relationship //
 Route::get('schools/{id}/students', [RelationshipController::class, 'schoolstudents']);
 Route::get('schools/{id}/teachers', [RelationshipController::class, 'schoolteachers']);
@@ -149,6 +150,17 @@ Route::get('/api/Library_books/{id}', [Library_BookController::class, 'show']);
 Route::post('/Library_books', [Library_BookController::class, 'store']);
 Route::post('/Library_books/{id}', [Library_BookController::class, 'update']);
 Route::delete('/Library_books/{id}', [Library_BookController::class, 'destroy']);
+// });
+
+// CRUD Library_ //
+Route::apiResource('/Libraries', LibrarieController::class) ;
+Route::get('/api/Libraries/{id}', [LibrarieController::class, 'show']);
+// crud by admin
+//Route::middleware('auth:api','admin')->group(function () {
+
+Route::post('/Libraries', [LibrarieController::class, 'store']);
+Route::post('/Libraries/{id}', [LibrarieController::class, 'update']);
+Route::delete('/Libraries/{id}', [LibrarieController::class, 'destroy']);
 // });
 
 

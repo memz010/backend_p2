@@ -11,7 +11,11 @@ use App\Http\Resources\School as SchoolResource;
 
 class SchoolController
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except(['index','show']);
+        $this->middleware('admin')->except(['index','show']);
+    }
     public function searchSchools(Request $request)
     {
         $query = $request->input('query');
@@ -74,8 +78,10 @@ class SchoolController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, School $school)
+    public function update(Request $request,$id)
     {
+        $school = School::find($id);
+    if ($school) {
         if ($request->has('name')) {
             $request->validate([
                 'name' => 'required|string',
@@ -118,11 +124,18 @@ class SchoolController
             'message' => 'School updated successfully',
         ], 201);
     }
+    else {
+        return response()->json([
+            "status" => "error",
+            "message" => "There is no school with this ID",
+        ], 422);
+    }
+}
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
        {
             $school = School::findOrFail($id);
             // Delete all certificates associated with the user

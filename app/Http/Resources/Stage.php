@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use  App\Http\Resources\Stage as StageResource;
@@ -15,6 +16,9 @@ class Stage extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'school_id' => $this->school_id,
+            'name' => $this->name,
+        ];
     }
 }

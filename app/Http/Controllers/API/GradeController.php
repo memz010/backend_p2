@@ -47,7 +47,6 @@ class GradeController
         return response()->json([
             'status' => 'success',
             'message' => 'grade stored successfully',
-            'grade' => $grade,
         ], 201);
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Models\SchoolStudent;
 use Illuminate\Http\Request;
 
+
 class SchoolStudentController
 {
     /**

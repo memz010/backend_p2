@@ -17,7 +17,11 @@ use App\Http\Controllers\API\BookController;
 use App\Http\Controllers\API\GuardianController;
 use App\Http\Controllers\API\Library_BookController;
 use App\Http\Controllers\API\LibrarieController;
-
+use App\Http\Controllers\API\ReportController;
+use App\Http\Controllers\API\SectionController;
+use App\Http\Controllers\API\StageController;
+use App\Http\Controllers\API\SubjectController;
+use App\Http\Controllers\API\TaskController;
 
 
 /*
@@ -163,4 +167,63 @@ Route::post('/Libraries/{id}', [LibrarieController::class, 'update']);
 Route::delete('/Libraries/{id}', [LibrarieController::class, 'destroy']);
 // });
 
+
+// crud all Reports //
+Route::apiResource('/Reports', ReportController::class) ;
+Route::get('/api/Reports/{id}', [ReportController::class, 'show']);
+
+//Route::middleware('auth:api','admin')->group(function () {
+
+Route::post('/Reports', [ReportController::class, 'store']);
+Route::post('/Reports/{id}', [ReportController::class, 'update']);
+Route::delete('/Reports/{Report}', [ReportController::class, 'destroy']);
+
+// });
+// crud all section //
+Route::apiResource('/Sections', SectionController::class) ;
+Route::get('/api/Sections/{id}', [SectionController::class, 'show']);
+
+//Route::middleware('auth:api','admin')->group(function () {
+
+Route::post('/Sections', [SectionController::class, 'store']);
+Route::post('/Sections/{id}', [SectionController::class, 'update']);
+Route::delete('/Sections/{Section}', [SectionController::class, 'destroy']);
+
+// });
+
+// crud all stage //
+Route::apiResource('/Stages', StageController::class) ;
+Route::get('/api/Stages/{id}', [StageController::class, 'show']);
+
+//Route::middleware('auth:api','admin')->group(function () {
+
+Route::post('/Stages', [StageController::class, 'store']);
+Route::post('/Stages/{id}', [StageController::class, 'update']);
+Route::delete('/Stages/{Stage}', [StageController::class, 'destroy']);
+
+// });
+
+// crud all subjects //
+Route::apiResource('/Subjects', SubjectController::class) ;
+Route::get('/api/Subjects/{id}', [SubjectController::class, 'show']);
+
+//Route::middleware('auth:api','admin')->group(function () {
+
+Route::post('/Subjects', [SubjectController::class, 'store']);
+Route::post('/Subjects/{id}', [SubjectController::class, 'update']);
+Route::delete('/Subjects/{Stage}', [SubjectController::class, 'destroy']);
+
+// });
+
+// crud all subjects //
+Route::apiResource('/Tasks', TaskController::class) ;
+Route::get('/api/Tasks/{id}', [TaskController::class, 'show']);
+
+//Route::middleware('auth:api','admin')->group(function () {
+
+Route::post('/Tasks', [TaskController::class, 'store']);
+Route::post('/Tasks/{id}', [TaskController::class, 'update']);
+Route::delete('/Tasks/{Stage}', [TaskController::class, 'destroy']);
+
+// });
 

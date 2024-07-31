@@ -10,6 +10,8 @@ class Report extends Model
     use HasFactory;
     protected $fillable = [
         'report' ,
+        'user_id',
+        'school_id',
     ];
     public function schools()
     {

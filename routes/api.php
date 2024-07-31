@@ -22,6 +22,7 @@ use App\Http\Controllers\API\SectionController;
 use App\Http\Controllers\API\StageController;
 use App\Http\Controllers\API\SubjectController;
 use App\Http\Controllers\API\TaskController;
+use App\Http\Controllers\API\SubmissionController;
 
 
 /*
@@ -211,11 +212,11 @@ Route::get('/api/Subjects/{id}', [SubjectController::class, 'show']);
 
 Route::post('/Subjects', [SubjectController::class, 'store']);
 Route::post('/Subjects/{id}', [SubjectController::class, 'update']);
-Route::delete('/Subjects/{Stage}', [SubjectController::class, 'destroy']);
+Route::delete('/Subjects/{Subject}', [SubjectController::class, 'destroy']);
 
 // });
 
-// crud all subjects //
+// crud all tasks //
 Route::apiResource('/Tasks', TaskController::class) ;
 Route::get('/api/Tasks/{id}', [TaskController::class, 'show']);
 
@@ -223,7 +224,20 @@ Route::get('/api/Tasks/{id}', [TaskController::class, 'show']);
 
 Route::post('/Tasks', [TaskController::class, 'store']);
 Route::post('/Tasks/{id}', [TaskController::class, 'update']);
-Route::delete('/Tasks/{Stage}', [TaskController::class, 'destroy']);
+Route::delete('/Tasks/{task}', [TaskController::class, 'destroy']);
 
 // });
+
+// crud all sumbission //
+Route::apiResource('/Submissions', SubmissionController::class) ;
+Route::get('/api/Submissions/{id}', [SubmissionController::class, 'show']);
+
+//Route::middleware('auth:api','admin')->group(function () {
+
+Route::post('/Submissions', [SubmissionController::class, 'store']);
+Route::post('/Submissions/{id}', [SubmissionController::class, 'update']);
+Route::delete('/Submissions/{Submission}', [SubmissionController::class, 'destroy']);
+
+// });
+
 

@@ -110,7 +110,7 @@ class Library_BookController
             $request->validate([
                 'pages' => 'required|integer|min:1|max:1000' ,
             ]);
-            $Library_Book->email = $request->email;
+            $Library_Book->pages = $request->pages;
         }
         $Library_Book->save();
 

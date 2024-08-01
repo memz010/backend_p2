@@ -23,6 +23,7 @@ use App\Http\Controllers\API\StageController;
 use App\Http\Controllers\API\SubjectController;
 use App\Http\Controllers\API\TaskController;
 use App\Http\Controllers\API\SubmissionController;
+use App\Http\Controllers\API\MarkController;
 
 
 /*
@@ -240,4 +241,15 @@ Route::delete('/Submissions/{Submission}', [SubmissionController::class, 'destro
 
 // });
 
+// crud all marks //
+Route::apiResource('/Marks', MarkController::class) ;
+Route::get('/api/Marks/{id}', [MarkController::class, 'show']);
+
+//Route::middleware('auth:api','admin')->group(function () {
+
+Route::post('/Marks', [MarkController::class, 'store']);
+Route::post('/Marks/{id}', [MarkController::class, 'update']);
+Route::delete('/Marks/{Mark}', [MarkController::class, 'destroy']);
+
+// });
 

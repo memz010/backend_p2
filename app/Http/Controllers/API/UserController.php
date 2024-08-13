@@ -12,6 +12,7 @@ class UserController
     /**
      * Display a listing of the resource.
      */
+    
     public function index(Request $request)
     {
     $limit = $request->input('limit') <= 50 ? $request->input('limit') : 15;

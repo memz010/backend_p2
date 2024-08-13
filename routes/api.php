@@ -64,7 +64,7 @@ Route::get('/api/managers/{id}', [ManagerController::class, 'show']);
 
 //Route::middleware('admin')->group(function () {
 Route::post('/users', [UserController::class, 'store']);
-Route::post('/users/{user}', [UserController::class, 'update']);
+Route::post('/users/{id}', [UserController::class, 'update']);
 Route::delete('/users/{id}', [UserController::class, 'destroy']);
 //});
 //store a new users

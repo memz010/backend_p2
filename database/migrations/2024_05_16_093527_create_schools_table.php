@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('type');
             $table->string('age_stage');
-            $table->integer('Subscription_price');
+            $table->integer('Subscription_price')->default(0);
             $table->string('address');
             $table->timestamps();
         });

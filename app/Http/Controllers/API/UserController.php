@@ -45,8 +45,8 @@ class UserController
                 'errors' => $validator->errors(),
             ], 422);
         }
-        $imagePath = null;
-        $imagepath = $request->file('image')->store('images');
+        // $imagePath = null;
+        // $imagepath = $request->file('image')->store('images');
         User::create([
             'school_id' => $request->school_id,
             'role' => $request->role,

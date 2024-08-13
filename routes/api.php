@@ -62,13 +62,11 @@ Route::get('/api/teachers/{id}', [TeacherController::class, 'show']);
 Route::get('/api/managers/{id}', [ManagerController::class, 'show']);
 });
 
-Route::middleware('admin')->group(function () {
-    Route::post('/users', [UserController::class, 'store']);
-    //update information users
-    Route::post('/users/{user}', [UserController::class, 'update']);
-    //delete all rolls of users
-    Route::delete('/users/{id}', [UserController::class, 'destroy']);
-});
+//Route::middleware('admin')->group(function () {
+Route::post('/users', [UserController::class, 'store']);
+Route::post('/users/{user}', [UserController::class, 'update']);
+Route::delete('/users/{id}', [UserController::class, 'destroy']);
+//});
 //store a new users
 
 // CRUD for all schools

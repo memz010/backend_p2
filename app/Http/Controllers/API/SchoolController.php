@@ -11,11 +11,6 @@ use App\Http\Resources\School as SchoolResource;
 
 class SchoolController
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api')->except(['index','show']);
-        $this->middleware('admin')->except(['index','show']);
-    }
     public function searchSchools(Request $request)
     {
         $query = $request->input('query');

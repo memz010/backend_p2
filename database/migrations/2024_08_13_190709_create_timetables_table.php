@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('days', function (Blueprint $table) {
+        Schema::create('timetables', function (Blueprint $table) {
+            $table->id();
+        //  $table->boolean('is_exit')->default(true);
+            $table->unsignedBigInteger('day_id');
             $table->unsignedBigInteger('subject_id');
-            $table->integer('day_1')->nullable(false);
-            $table->integer('day_2')->nullable(false);
-            $table->integer('day_3')->nullable(false);
-            $table->integer('day_4')->nullable(false);
-            $table->integer('day_5')->nullable(false);
-            $table->integer('day_6')->nullable(false);
-            $table->integer('day_7')->nullable(false);
+            $table->timestamps();
+            $table->foreign('day_id')->references('id')->on('days')->onDelete('cascade');
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('days');
+        Schema::dropIfExists('timetables');
     }
 };

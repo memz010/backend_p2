@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('uploaded_date');
             $table->date('deadline');
             $table->date('start_of_submissions_date');
-            $table->text('description');
+            $table->text('description')->nullable();;
             $table->timestamps();
 
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');

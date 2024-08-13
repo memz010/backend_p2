@@ -191,7 +191,6 @@ Route::get('/api/Libraries/{id}', [LibrarieController::class, 'show']);
 });
 // crud by admin
 Route::middleware('admin')->group(function () {
-
 Route::post('/Libraries', [LibrarieController::class, 'store']);
 Route::post('/Libraries/{id}', [LibrarieController::class, 'update']);
 Route::delete('/Libraries/{id}', [LibrarieController::class, 'destroy']);

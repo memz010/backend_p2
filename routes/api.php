@@ -49,13 +49,18 @@ Route::group(['prefix' => 'auth'], function () {
     Route::middleware('auth:api')->get('/logout', [ AuthController::class ,'logout']);
 });
 // index all rolls of users
+Route::middleware('auth:api')->group(function () {
 Route::apiResource('/students', UserController::class) ;
 Route::apiResource('/teachers', TeacherController::class);
 Route::apiResource('/managers', ManagerController::class);
+});
+
 // show specific users
+Route::middleware('auth:api')->group(function () {
 Route::get('/api/students/{id}', [UserController::class, 'show']);
 Route::get('/api/teachers/{id}', [TeacherController::class, 'show']);
 Route::get('/api/managers/{id}', [ManagerController::class, 'show']);
+});
 
 Route::middleware('admin')->group(function () {
     Route::post('/users', [UserController::class, 'store']);
@@ -84,9 +89,12 @@ Route::delete('/schools/{id}', [SchoolController::class, 'destroy']);
 // get all addition ...
 
 //
-Route::middleware('admin')->group(function () {
+Route::middleware('auth:api')->group(function () {
 Route::apiResource('/additions',AdditionController::class,) ;
 Route::get('/api/additions/{id}', [AdditionController::class, 'show']);
+});
+
+Route::middleware('admin')->group(function () {
 Route::post('/additions', [AdditionController::class, 'store']);
 Route::post('/additions/{addition}', [AdditionController::class, 'update']);
 Route::delete('/additions/{id}', [AdditionController::class, 'destroy']);
@@ -132,7 +140,7 @@ Route::get('/api/exams/{id}', [ExamController::class, 'show']);
 });
 
 
-Route::middleware('auth:api','admin')->group(function () {
+Route::middleware('admin')->group(function () {
 
 Route::post('/exams', [ExamController::class, 'store']);
 Route::post('/exams/{id}', [ExamController::class, 'update']);

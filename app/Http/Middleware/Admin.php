@@ -15,11 +15,11 @@ class Admin
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle($request, Closure $next)
-    {
-        if ($request->user() && $request->user()->role == 4)
-        {
-            return $next($request);
-        }
-        abort(403, 'Unauthorized');
-    }
+   {
+       if (!$request->user() || $request->user()->role != 4) {
+           return response()->json(['error' => 'Unauthorized'], 401);
+       }
+
+       return $next($request);
+   }
 }

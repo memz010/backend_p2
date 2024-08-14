@@ -65,7 +65,7 @@ Route::get('/api/managers/{id}', [ManagerController::class, 'show']);
 //Route::middleware('admin')->group(function () {
 Route::post('/users', [UserController::class, 'store']);
 Route::post('/users/{id}', [UserController::class, 'update']);
-Route::delete('/users/{id}', [UserController::class, 'destroy']);
+Route::delete('/users/{user}', [UserController::class, 'destroy']);
 //});
 //store a new users
 
@@ -81,7 +81,7 @@ Route::get('/api/schools/{id}', [SchoolController::class, 'show']);
 Route::middleware('admin')->group(function () {
 Route::post('/schools', [SchoolController::class, 'store']);
 Route::post('/schools/{id}', [SchoolController::class, 'update']);
-Route::delete('/schools/{id}', [SchoolController::class, 'destroy']);
+Route::delete('/schools/{school}', [SchoolController::class, 'destroy']);
 });
 // CRUD for all Addition
 // get all addition ...
@@ -95,7 +95,7 @@ Route::get('/api/additions/{id}', [AdditionController::class, 'show']);
 Route::middleware('admin')->group(function () {
 Route::post('/additions', [AdditionController::class, 'store']);
 Route::post('/additions/{addition}', [AdditionController::class, 'update']);
-Route::delete('/additions/{id}', [AdditionController::class, 'destroy']);
+Route::delete('/additions/{addition}', [AdditionController::class, 'destroy']);
 });
 
 // Relationship //
@@ -115,7 +115,7 @@ Route::get('/api/certificate/{id}', [CertificateController::class, 'show']);
 Route::middleware('admin')->group(function () {
 Route::post('/certificate', [CertificateController::class, 'store']);
 Route::post('/certificate/{id}', [CertificateController::class, 'update']);
-Route::delete('/certificate/{id}', [CertificateController::class, 'destroy']);
+Route::delete('/certificate/{certificate}', [CertificateController::class, 'destroy']);
 });
 // crud all grades //
 Route::middleware('auth:api')->group(function () {
@@ -124,11 +124,9 @@ Route::get('/api/grades/{id}', [GradeController::class, 'show']);
 });
 
 Route::middleware('admin')->group(function () {
-
 Route::post('/grades', [GradeController::class, 'store']);
 Route::post('/grades/{id}', [GradeController::class, 'update']);
 Route::delete('/grades/{grade}', [GradeController::class, 'destroy']);
-
 });
 
 // crud all exam //
@@ -139,11 +137,9 @@ Route::get('/api/exams/{id}', [ExamController::class, 'show']);
 
 
 Route::middleware('admin')->group(function () {
-
 Route::post('/exams', [ExamController::class, 'store']);
 Route::post('/exams/{id}', [ExamController::class, 'update']);
 Route::delete('/exams/{exam}', [ExamController::class, 'destroy']);
-
  });
 
 // BOOK //
@@ -154,10 +150,9 @@ Route::get('/api/books/{id}', [BookController::class, 'show']);
 
 // crud by admin
 Route::middleware('admin')->group(function () {
-
 Route::post('/books', [BookController::class, 'store']);
 Route::post('/books/{id}', [BookController::class, 'update']);
-Route::delete('/books/{id}', [BookController::class, 'destroy']);
+Route::delete('/books/{book}', [BookController::class, 'destroy']);
  });
 
 // CRUD GuardianController //
@@ -179,7 +174,7 @@ Route::get('/api/Library_books/{id}', [Library_BookController::class, 'show']);
 Route::middleware('admin')->group(function () {
 Route::post('/Library_books', [Library_BookController::class, 'store']);
 Route::post('/Library_books/{id}', [Library_BookController::class, 'update']);
-Route::delete('/Library_books/{id}', [Library_BookController::class, 'destroy']);
+Route::delete('/Library_books/{Library_book}', [Library_BookController::class, 'destroy']);
 });
 
 // CRUD Library_ //
@@ -191,7 +186,7 @@ Route::get('/api/Libraries/{id}', [LibrarieController::class, 'show']);
 Route::middleware('admin')->group(function () {
 Route::post('/Libraries', [LibrarieController::class, 'store']);
 Route::post('/Libraries/{id}', [LibrarieController::class, 'update']);
-Route::delete('/Libraries/{id}', [LibrarieController::class, 'destroy']);
+Route::delete('/Libraries/{Librarie}', [LibrarieController::class, 'destroy']);
  });
 
 
@@ -202,7 +197,6 @@ Route::get('/api/Reports/{id}', [ReportController::class, 'show']);
 });
 
 Route::middleware('admin')->group(function () {
-
 Route::post('/Reports', [ReportController::class, 'store']);
 Route::post('/Reports/{id}', [ReportController::class, 'update']);
 Route::delete('/Reports/{Report}', [ReportController::class, 'destroy']);
@@ -213,8 +207,8 @@ Route::delete('/Reports/{Report}', [ReportController::class, 'destroy']);
 Route::apiResource('/Sections', SectionController::class) ;
 Route::get('/api/Sections/{id}', [SectionController::class, 'show']);
 
-Route::middleware('admin')->group(function () {
 
+Route::middleware('admin')->group(function () {
 Route::post('/Sections', [SectionController::class, 'store']);
 Route::post('/Sections/{id}', [SectionController::class, 'update']);
 Route::delete('/Sections/{Section}', [SectionController::class, 'destroy']);

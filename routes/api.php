@@ -78,11 +78,14 @@ Route::get('/api/schools/{id}', [SchoolController::class, 'show']);
 // search for all schools
 
 //
-Route::middleware('admin')->group(function () {
-Route::post('/schools', [SchoolController::class, 'store']);
-Route::post('/schools/{id}', [SchoolController::class, 'update']);
-Route::delete('/schools/{school}', [SchoolController::class, 'destroy']);
+Route::middleware(['auth:api', 'admin'])->group(function () {
+    Route::post('/schools', [SchoolController::class, 'store']);
+    Route::post('/schools/{id}', [SchoolController::class, 'update']);
+    Route::delete('/schools/{school}', [SchoolController::class, 'destroy']);
+
 });
+
+
 // CRUD for all Addition
 // get all addition ...
 
@@ -92,7 +95,7 @@ Route::apiResource('/additions',AdditionController::class,) ;
 Route::get('/api/additions/{id}', [AdditionController::class, 'show']);
 });
 
-Route::middleware('admin')->group(function () {
+Route::middleware(['auth:api', 'admin'])->group(function () {
 Route::post('/additions', [AdditionController::class, 'store']);
 Route::post('/additions/{addition}', [AdditionController::class, 'update']);
 Route::delete('/additions/{addition}', [AdditionController::class, 'destroy']);
@@ -112,7 +115,7 @@ Route::get('/api/certificate/{id}', [CertificateController::class, 'show']);
 });
 // crud by admin
 
-Route::middleware('admin')->group(function () {
+Route::middleware(['auth:api', 'admin'])->group(function () {
 Route::post('/certificate', [CertificateController::class, 'store']);
 Route::post('/certificate/{id}', [CertificateController::class, 'update']);
 Route::delete('/certificate/{certificate}', [CertificateController::class, 'destroy']);
@@ -123,7 +126,7 @@ Route::apiResource('/grades', GradeController::class) ;
 Route::get('/api/grades/{id}', [GradeController::class, 'show']);
 });
 
-Route::middleware('admin')->group(function () {
+Route::middleware(['auth:api', 'admin'])->group(function () {
 Route::post('/grades', [GradeController::class, 'store']);
 Route::post('/grades/{id}', [GradeController::class, 'update']);
 Route::delete('/grades/{grade}', [GradeController::class, 'destroy']);
@@ -136,7 +139,7 @@ Route::get('/api/exams/{id}', [ExamController::class, 'show']);
 });
 
 
-Route::middleware('admin')->group(function () {
+Route::middleware(['auth:api', 'admin'])->group(function () {
 Route::post('/exams', [ExamController::class, 'store']);
 Route::post('/exams/{id}', [ExamController::class, 'update']);
 Route::delete('/exams/{exam}', [ExamController::class, 'destroy']);
@@ -149,7 +152,7 @@ Route::get('/api/books/{id}', [BookController::class, 'show']);
 });
 
 // crud by admin
-Route::middleware('admin')->group(function () {
+Route::middleware(['auth:api', 'admin'])->group(function () {
 Route::post('/books', [BookController::class, 'store']);
 Route::post('/books/{id}', [BookController::class, 'update']);
 Route::delete('/books/{book}', [BookController::class, 'destroy']);
@@ -161,7 +164,7 @@ Route::apiResource('/Guardians', GuardianController::class) ;
 Route::get('/api/Guardians/{id}', [GuardianController::class, 'show']);
 });
 // crud by admin
-Route::middleware('admin')->group(function () {
+Route::middleware(['auth:api', 'admin'])->group(function () {
 Route::post('/Guardians', [GuardianController::class, 'store']);
  });
 
@@ -171,7 +174,7 @@ Route::apiResource('/Library_books', Library_BookController::class) ;
 Route::get('/api/Library_books/{id}', [Library_BookController::class, 'show']);
 });
 // crud by admin
-Route::middleware('admin')->group(function () {
+Route::middleware(['auth:api', 'admin'])->group(function () {
 Route::post('/Library_books', [Library_BookController::class, 'store']);
 Route::post('/Library_books/{id}', [Library_BookController::class, 'update']);
 Route::delete('/Library_books/{Library_book}', [Library_BookController::class, 'destroy']);
@@ -183,7 +186,7 @@ Route::apiResource('/Libraries', LibrarieController::class) ;
 Route::get('/api/Libraries/{id}', [LibrarieController::class, 'show']);
 });
 // crud by admin
-Route::middleware('admin')->group(function () {
+Route::middleware(['auth:api', 'admin'])->group(function () {
 Route::post('/Libraries', [LibrarieController::class, 'store']);
 Route::post('/Libraries/{id}', [LibrarieController::class, 'update']);
 Route::delete('/Libraries/{Librarie}', [LibrarieController::class, 'destroy']);
@@ -196,7 +199,7 @@ Route::apiResource('/Reports', ReportController::class) ;
 Route::get('/api/Reports/{id}', [ReportController::class, 'show']);
 });
 
-Route::middleware('admin')->group(function () {
+Route::middleware(['auth:api', 'admin'])->group(function () {
 Route::post('/Reports', [ReportController::class, 'store']);
 Route::post('/Reports/{id}', [ReportController::class, 'update']);
 Route::delete('/Reports/{Report}', [ReportController::class, 'destroy']);
@@ -208,7 +211,7 @@ Route::apiResource('/Sections', SectionController::class) ;
 Route::get('/api/Sections/{id}', [SectionController::class, 'show']);
 
 
-Route::middleware('admin')->group(function () {
+Route::middleware(['auth:api', 'admin'])->group(function () {
 Route::post('/Sections', [SectionController::class, 'store']);
 Route::post('/Sections/{id}', [SectionController::class, 'update']);
 Route::delete('/Sections/{Section}', [SectionController::class, 'destroy']);
@@ -219,20 +222,17 @@ Route::delete('/Sections/{Section}', [SectionController::class, 'destroy']);
 Route::apiResource('/Stages', StageController::class) ;
 Route::get('/api/Stages/{id}', [StageController::class, 'show']);
 
-Route::middleware('admin')->group(function () {
-
+Route::middleware(['auth:api', 'admin'])->group(function () {
 Route::post('/Stages', [StageController::class, 'store']);
 Route::post('/Stages/{id}', [StageController::class, 'update']);
 Route::delete('/Stages/{Stage}', [StageController::class, 'destroy']);
-
 });
 
 // crud all subjects //
 Route::apiResource('/Subjects', SubjectController::class) ;
 Route::get('/api/Subjects/{id}', [SubjectController::class, 'show']);
 
-Route::middleware('admin')->group(function () {
-
+Route::middleware(['auth:api', 'admin'])->group(function () {
 Route::post('/Subjects', [SubjectController::class, 'store']);
 Route::post('/Subjects/{id}', [SubjectController::class, 'update']);
 Route::delete('/Subjects/{Subject}', [SubjectController::class, 'destroy']);
@@ -244,8 +244,8 @@ Route::middleware('auth:api')->group(function () {
 Route::apiResource('/Tasks', TaskController::class) ;
 Route::get('/api/Tasks/{id}', [TaskController::class, 'show']);
 });
-Route::middleware('admin')->group(function () {
 
+Route::middleware(['auth:api', 'admin'])->group(function () {
 Route::post('/Tasks', [TaskController::class, 'store']);
 Route::post('/Tasks/{id}', [TaskController::class, 'update']);
 Route::delete('/Tasks/{task}', [TaskController::class, 'destroy']);
@@ -258,7 +258,7 @@ Route::apiResource('/Submissions', SubmissionController::class) ;
 Route::get('/api/Submissions/{id}', [SubmissionController::class, 'show']);
 });
 
-Route::middleware('admin')->group(function () {
+Route::middleware(['auth:api', 'admin'])->group(function () {
 
 Route::post('/Submissions', [SubmissionController::class, 'store']);
 Route::post('/Submissions/{id}', [SubmissionController::class, 'update']);
@@ -272,7 +272,7 @@ Route::apiResource('/Marks', MarkController::class) ;
 Route::get('/api/Marks/{id}', [MarkController::class, 'show']);
 });
 
-Route::middleware('admin')->group(function () {
+Route::middleware(['auth:api', 'admin'])->group(function () {
 
 Route::post('/Marks', [MarkController::class, 'store']);
 Route::post('/Marks/{id}', [MarkController::class, 'update']);

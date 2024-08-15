@@ -6,13 +6,14 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use  App\Http\Resources\User as UserResource;
 use Illuminate\Support\facades\Hash;
+use App\Http\Requests\StoreUserRequest;
 
 class UserController
 {
     /**
      * Display a listing of the resource.
      */
-    
+
     public function index(Request $request)
     {
     $limit = $request->input('limit') <= 50 ? $request->input('limit') : 15;
@@ -46,8 +47,8 @@ class UserController
                 'errors' => $validator->errors(),
             ], 422);
         }
-        // $imagePath = null;
-        // $imagepath = $request->file('image')->store('images');
+       //  $imagePath = null;
+       //  $imagepath = $request->file('image')->store('images');
         User::create([
             'school_id' => $request->school_id,
             'role' => $request->role,
